@@ -1,0 +1,6 @@
+.vscode
+out/*.aux
+out/*.bbl
+out/*.log
+out/*.tex
+out/*.dot

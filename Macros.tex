@@ -1,0 +1,38 @@
+% Para matemática.
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Para \demoline
+\usepackage{ragged2e}
+
+% Para usar \text
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\newcommand{\Title}[1]{%
+  \raggedright
+  \noindent{\textbf{#1}}%
+  \justifying
+  \vspace{1em}%
+}
+
+\newcommand{\demoline}{\vspace{0.5em}}
+
+\newcommand{\Indent}{\hspace*{0.75cm}}
+\newcommand{\MiniIndent}{\hspace*{0.325cm}}
+\newenvironment{groupIzq}[1]{%
+  \begin{list}{}{%
+      \setlength{\leftmargin}{#1}%
+      \setlength{\topsep}{0pt} % Elimina el espacio superior
+      \setlength{\partopsep}{0pt} % Asegura que no haya espacio extra
+    }
+  \item[]
+}{%
+  \end{list}
+}
+\newcommand{\entt}{\ensuremath{\mathbb{Z}}}
+\newcommand{\natt}{\ensuremath{\mathbb{N}}}

@@ -1,0 +1,238 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[top=1cm,bottom=2cm,left=1cm,right=1cm]{geometry}%
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+% Graphviz
+\usepackage{tikz}
+\usepackage{dot2texi}
+\usepackage{graphicx}
+\usetikzlibrary{shapes.geometric}
+
+% Inputs
+\input{Macros}
+
+% Colors
+\pagecolor{gray!160}
+\color{gray!10}
+
+% Space between \par
+\setlength{\parskip}{.35em}
+
+\begin{document}
+
+\Title{Ejercicio 1}
+\par Demostrar, usando inducción en la cantidad de aristas, que todo digrafo \ensuremath{D} satisface
+\demoline
+
+\begin{math}
+  \displaystyle
+  \sum_{v \in V(D)} d_{\text{in}}(v)
+  = \sum_{v \in V(D)} d_{\text{out}}(v)
+  = |E(D)|
+\end{math}
+
+\demoline
+\par Para poder hacer inducción sobre la cantidad de aristas, primero empezamos definiendo el predicado:
+\demoline
+\par \ensuremath{P(n)\text{: } ``\text{Todo grafo } G(E, V) \text{ cumple que } \sum_{v \in V(D)} d_{\text{in}}(v) = \sum_{v \in V(D)} d_{\text{out}}(v) = |E| = m"}
+\demoline
+
+\par \underline{\textbf{Caso Base (\ensuremath{m = 0}):}}
+\par Un digrafo \ensuremath{G=(V, E)} que tiene 0 aristas, cumple simultáneamente:
+\begin{groupIzq}{1em}
+  \begin{itemize}
+    \item \ensuremath{\sum_{v \in V(G)} d_{\text{in}}(v) = 0}
+    \item \ensuremath{\sum_{v \in V(G)} d_{\text{out}}(v) = 0}
+    \item \ensuremath{|E| = 0}
+  \end{itemize}
+\end{groupIzq}
+\par con lo cual se mantiene la igualdad \ensuremath{\sum_{v \in V(G)} d_{\text{in}}(v) = \sum_{v \in V(G)} d_{\text{out}}(v) = |E| = 0}.
+\par Entonces el caso base \textbf{vale}.
+
+\demoline
+
+\par \underline{\textbf{Paso Inductivo:}}
+\par Sea \ensuremath{k \in \natt}, y supongamos que \ensuremath{P(k)} vale.
+\par Sea \ensuremath{G(V, E)} un digrafo cualquiera, tal que: \ensuremath{|E| = k + 1}.
+\par Sea \ensuremath{e = (u, v)}, con \ensuremath{e \in E \land u,v \in V}.
+\par Sea \ensuremath{G'=(V, E')}, tal que \ensuremath{E'= E \setminus \{e\} \Rightarrow |E'| = k}.
+\demoline
+\par Si se cumple que \ensuremath{|E'|=k}, entonces se cumple la HI, con lo cual:
+\par \ensuremath{\sum_{v \in V(G')} d_{\text{in}}(v) = \sum_{v \in V(G')} d_{\text{out}}(v) = k}
+\demoline
+\par ¿Qué pasa si agregamos \ensuremath{e} a \ensuremath{E'}?
+\par En primer lugar se cumpliría la igualdad: \ensuremath{G'(V, E' \cup \{e\}) = G(V, E)}.
+\par Además, tendría una serie de consecuencias:
+\begin{groupIzq}{1em}
+  \begin{itemize}
+    \item \ensuremath{\sum_{v \in V(G)} d_{\text{in}}(v) = \sum_{v \in V(G')} d_{\text{in}}(v) + 1 = k + 1}
+    \item \ensuremath{\sum_{v \in V(G)} d_{\text{out}}(v) = \sum_{v \in V(G')} d_{\text{out}}(v) + 1 = k + 1}
+    \item \ensuremath{|E| = |E'| + 1 = k + 1}
+  \end{itemize}
+\end{groupIzq}
+\par Y esto es justamente lo que buscamos!
+\par Ahora tenemos que \ensuremath{\sum_{v \in V(G)} d_{\text{in}}(v) = \sum_{v \in V(G)} d_{\text{out}}(v) = |E| = k + 1}.
+\par Con lo cual, queda demostrado que:
+\par \ensuremath{\forall k \in \natt : P(k) \text{ es verdadero}}.
+
+\demoline
+\demoline
+\par Fin.
+
+\newpage
+
+\Title{Ejercicio 2}
+\par Demostrar, usando la técnica de reducción al absurdo, que todo grafo no trivial tiene al menos dos vértices del mismo grafo. \textbf{Ayuda:} prestar atención a la secuencia ordenada de los grados de los vértices.
+
+\demoline
+
+\par Vamos por partes, ¿Qué es la técnica de reducción al absurdo? (Reductio ad Absurdum)
+\par Si se tiene una proposición \ensuremath{P}, se puede suponer que \ensuremath{P} es falsa \ensuremath{(\neg P)} y llegar a una contradicción, en cuyo caso se puede concluir que \ensuremath{P} es verdadera.
+
+\demoline
+\par Para eso, definamos la proposición \ensuremath{P}.
+\par \ensuremath{P: ``\text{Todo grafo no trivial tiene al menos dos vértices del mismo grado".}}
+\par \ensuremath{\neg P: ``\text{Existe al menos un grafo no trivial que tiene todos sus vértices de distinto grado}".}
+\par Supongamos que \ensuremath{\neg P} se cumple, o sea que \ensuremath{P} es falsa.
+\par Si eso fuera cierto, existiría un grafo \ensuremath{G(V, E)}, con |V| = n, de tal forma que:
+\par 
+  \ensuremath{
+  \left\{ \deg(v) \,\middle|\, v \in V \right\} = \left\{0, \dots, n-1 \right\}
+  }
+\par Sabemos que estos conjuntos tienen al menos 2 elementos, pues \ensuremath{G} es no trivial.
+
+\demoline
+
+\par Pero en un grafo no puede coexistir un vértice con grado 0 y otro con grado \ensuremath{n-1}
+ya que el vértice de grado \ensuremath{n-1}
+debería estar conectado con todos los demás, incluido el de grado 0. Contradicción.
+
+\demoline
+
+\par Por la técnica de reducción al absurdo, se concluye que \ensuremath{P} es verdadera.
+
+\demoline
+\demoline
+
+\par Fin.
+
+\newpage
+
+\Title{Ejercicio 3}
+
+\par Un grafo orientado es un digrafo \ensuremath{D} tal que al menos uno de \ensuremath{v \rightarrow w} y \ensuremath{w \rightarrow v} no es una arista de \ensuremath{D}, para todo \ensuremath{v, w \in V(D)}.
+\par En otras palabras, un grafo orientado se obtiene a partir de un grafo no orientado dando una dirección a cada arista.
+\par Demostrar en forma constructiva que para cada \ensuremath{n} existe un único grafo orientado cuyos vértices tienen todos grados de salida distintos.
+\par \textbf{Ayuda:} aprovechar el ejercicio anterior y observar que el absurdo no se produce para un único grafo orientado.
+
+\demoline
+
+\par Este problema lo encuentro un poco confuso, ya que el grafo no es único: para cada \ensuremath{n} vamos a más de un digrafo cuyos vértices tienen tienen todos grados de salida distintos.
+\par Pero por otro lado considero excelente porque mezcla distintas técnicas de demostración.
+\demoline
+
+\par Para demostrar en forma constructiva, primero debemos "armar" el grafo (es decir, exhibirlo).
+\par Vamos a tratar de armarlo de la forma más débil posible, es decir: \textbf{ponerle la mínima cantidad de restricciones posibles}.
+
+\demoline
+
+\par Sea \ensuremath{k \in \natt}, \ensuremath{k \geq 2} y sea \ensuremath{V = \{v_1, \dots, v_k\}} un conjunto de vértices.
+\par Sea \ensuremath{G(V, E)} un grafo no-dirigido con \ensuremath{|E| = k}, y sea \ensuremath{G'(V, E')}  un digrafo orientado tal que \ensuremath{|E'| = |E|}.
+\par \ensuremath{G'} además cumple que: \ensuremath{\{d_\text{out}(v)\text{ / } v \in V\} = \{0, \dots, k-1\}}.
+
+\demoline
+\par ¿El mínimo de ese conjunto \textbf{DEBE} ser 0? La respuesta es sí. Veamos por qué eso es así:
+\par Sea \ensuremath{z \in \entt, z \geq 0}.
+% \par Sea  supongamos que el conjunto empieza con un \ensuremath{n \in \natt \text{ / } n \geq 1}, por ejemplo:
+\par Sea \ensuremath{\{d_\text{out}(v)\text{ / } v \in V\} = \{z, \dots, z + (k - 1)\} \Rightarrow \sum_{v \in V}{d_\text{out}(v)} = kz  + \dfrac{k(k - 1)}{2}}
+\par Supongamos que \ensuremath{z \geq 1}: \textbf{lleguemos a un absurdo!}.
+\par Sabemos que el número máximo de aristas en un digrafo \ensuremath{D(V, E)} no puede exeder \ensuremath{n(n - 1)}. Si \ensuremath{n} es el número de vértices, cada vértice a lo sumo estará conectado a los otros (y no a sí mismo, pues \ensuremath{D} es simple), y como el número máximo de aristas para un determinado vértice es \ensuremath{n - 1}, y como hay \ensuremath{n} vértices: \ensuremath{|E| \leq n(n - 1)}.
+\par Entonces:
+\par \ensuremath{kz + \dfrac{k(k - 1)}{2} \leq k(k - 1)}
+\par \ensuremath{kz \leq k(k - 1) - \dfrac{k(k - 1)}{2}}
+\par \ensuremath{z \leq (k - 1) - \dfrac{(k - 1)}{2}}
+\par \ensuremath{z \leq \dfrac{(k - 1)}{2}}
+\par Habíamos dicho que \ensuremath{k \geq 2} y que \ensuremath{z \geq 1}. Si tomamos \ensuremath{z = 1 \land k = 2} 
+\par \ensuremath{1 \leq \dfrac{1}{2}}. Absurdo!
+\par Por la ténica de reducción al absurdo, se tiene que \ensuremath{z = 0}.
+\demoline
+\par Esto nos sugiere que...para cada grafo de \ensuremath{n} vértices, siempre vamos a encontrar un \ensuremath{z} que rompa la cota \ensuremath{n(n-1)}. 
+\demoline
+\demoline
+\demoline
+\demoline
+\par Pero... ¿Posta que funca?
+\par Demostremos que si:
+\demoline
+\par 
+\par Sea \ensuremath{\{d_\text{out}(v)\text{ / } v \in V\} = \{0, \dots, k - 1\} \Rightarrow \sum_{v \in V}{d_\text{out}(v)} = \dfrac{k(k - 1)}{2}}
+\par Luego, se efectivamente se verifica que \ensuremath{\dfrac{k(k - 1)}{2} \leq k(k - 1)}, pues \ensuremath{k \geq 2}.
+\demoline
+\par Ahora ya sabemos \ensuremath{G'} existe! Y además está exhibido.
+\par Para completar la demostración, debemos probar que es único, pero realmente... no lo es.
+\par Sea \ensuremath{v \in V} con \ensuremath{d_\text{out}(v) > 0 }. Este vértice existe, pues \ensuremath{k \geq 2}, y tomemos una de sus aristas salientes \ensuremath{e \in E'} e invertamos su dirección!
+\par Acá se nos abren dos posibilidades, pero ya con la primera sabemos que no es único!
+\par Si \ensuremath{k = 2}, tendremos dos tipos de grafos posibles:
+\begin{dot2tex}[dot,options=-tmath]
+  digraph G {
+    color=lightgrey;
+    rankdir=LR;
+    node [style=filled, fillcolor=black, color=gray, shape=diamond];
+    v -> u;
+}
+\end{dot2tex}
+\begin{dot2tex}[dot,options=-tmath]
+  digraph G {
+    color=lightgrey;
+    rankdir=LR;
+    node [style=filled, fillcolor=black, color=gray, shape=diamond];
+    
+    v -> u [dir=back];
+}
+\end{dot2tex}
+\demoline
+\par Pero ya vemos que el grafo no es único, vemos que tanto \ensuremath{G'} como \ensuremath{G'^T} sirven.
+\demoline
+\par Análogamente, para cualquier k, \ensuremath{G'} y \ensuremath{G'^T} funcionan. Pero no solo eso, acá algunas configuraciones que funcionan:
+\begin{dot2tex}[dot,options=-tmath]
+  digraph G {
+    color=lightgrey;
+    rankdir=LR;
+    node [style=filled, fillcolor=black, color=gray, shape=diamond];
+    
+    A -> B;
+    A -> C;
+    B -> C;
+}
+\end{dot2tex}
+\begin{dot2tex}[dot,options=-tmath]
+  digraph G {
+    color=lightgrey;
+    rankdir=LR;
+    node [style=filled, fillcolor=black, color=gray, shape=diamond];
+    
+    A -> B [dir=back];
+    A -> C [dir=back];
+    B -> C;
+}
+\end{dot2tex}
+\begin{dot2tex}[dot,options=-tmath]
+  digraph G {
+    color=lightgrey;
+    rankdir=LR;
+    node [style=filled, fillcolor=black, color=gray, shape=diamond];
+    
+    A -> B;
+    A -> C [dir=back];
+    B -> C [dir=back];
+}
+\end{dot2tex}
+\demoline
+\par Etcétera.
+\par En definitiva, si encontramos un digrafo orientado \ensuremath{G'} que funciona, cualquier digrafo \ensuremath{G''} que sea isomorfismo de \ensuremath{G'}, también sirve.
+\demoline
+\par Conclusión: No pude probar la unicidad, no desde el punto de vista estructural, al menos.
+\end{document}
