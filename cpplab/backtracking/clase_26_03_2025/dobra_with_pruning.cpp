@@ -12,6 +12,7 @@ class SolutionWithPruning
 
     bool is_consonant(char c) { return ('A' <= c && c <= 'Z') && !is_vowel(c); }
 
+    // Complexity: O(3^x) where x=#(_) in s
     int backtrack(const std::string &s, int i, int consecutive_vowels, int consecutive_cons,
                   bool has_L)
     {
