@@ -112,7 +112,7 @@ class Solution
 
         int total = 0;
 
-        for (int next_idx = st.current_idx; next_idx < st.n * st.n; ++next_idx)
+        for (int next_idx = st.current_idx; next_idx < st.n * st.n; next_idx += 1)
         {
             swap(st.n, st.current_solution, st.current_idx, next_idx);
             update_sums(st, 1);
