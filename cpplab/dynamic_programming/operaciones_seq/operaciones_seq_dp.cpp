@@ -22,16 +22,13 @@ class Solution
         dp[v[0]] = fst;
 
         for (int j = 0; j <= w; j += 1)
-        {
             if (dp[j].has_value())
             {
                 auto [idx, value] = dp[j].value();
                 int next_idx = idx + 1;
 
                 if (next_idx == v.size())
-                {
                     continue;
-                }
 
                 int add_res = value + v[next_idx];
                 int mult_res = value * v[next_idx];
@@ -46,7 +43,6 @@ class Solution
                 if (pow_res <= w)
                     dp[pow_res] = std::make_pair(next_idx, pow_res);
             }
-        }
 
         return dp[w].has_value();
     }
