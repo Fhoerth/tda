@@ -1,9 +1,9 @@
+#include <cassert>
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "../../test_utils.h"
 #include "./operaciones_seq.h"
 
 class Solution

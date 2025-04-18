@@ -1,36 +1,15 @@
+#include <cassert>
 #include <cmath>
 #include <iostream>
+#include <optional>
 #include <string>
+#include <utility>
 #include <vector>
 
-#include <optional>
-#include <utility>
-
-#include "../../test_utils.h"
 #include "./operaciones_seq.h"
 
 using Index = int;
 using Value = int;
-
-void print_dp(const std::vector<std::optional<std::pair<Index, Value>>> &dp)
-{
-    std::cout << "[\n";
-    for (std::size_t i = 0; i < dp.size(); ++i)
-    {
-        std::cout << "  " << i << ": ";
-        if (dp[i].has_value())
-        {
-            auto [idx, val] = dp[i].value();
-            std::cout << "(" << idx << ", " << val << ")";
-        }
-        else
-        {
-            std::cout << "nullopt";
-        }
-        std::cout << '\n';
-    }
-    std::cout << "]\n";
-}
 
 class Solution
 {
