@@ -13,6 +13,9 @@
 // │  │────────────────────┘
 // └──┘
 
+// Mismo que el ejemplo 2, pero usando una estructura extra que nos permita
+// reconstruir el camino más óptimo.
+
 #include <iostream>
 
 #include "../../../print_utils.h"
