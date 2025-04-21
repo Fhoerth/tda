@@ -37,7 +37,8 @@ El `min` nos asegura que, si un camino mejor aparece desde otro nodo `u`, lo con
 
 La respuesta es que, siempre miramos todas las aristas `(u,v)`, con lo
 cuál nuestro estado (ya sea en forma de matriz / vector), siempre tiene
-la mejor forma de llegar a `v` con `j` aristas. Pero si yo se que desde `u` llego a `w`, me interesa saber cuánto cuesta llegar a `u` con `j-1` aristas.
+la mejor forma de llegar a `v` con `j` aristas. Pero si yo se que desde `u` llego a `w`, me interesa saber cuánto cuesta llegar a `u` con `j-1` aristas, si a eso le sumo el peso `w` puedo sacar conclusiones:
+Quizás `dp[j - 1][u] + w` es más barato que `dp[j][v]`.
 
 ---
 
