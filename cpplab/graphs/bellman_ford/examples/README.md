@@ -10,6 +10,17 @@ La estructura más natural es usar una **matriz `dp[j][v]`**, donde:
 - `v` es el nodo de llegada.
 - `dp[j][v]` representa la distancia mínima para llegar al nodo `v` usando exactamente `j` aristas.
 
+## 💡 ¿Se puede usar un solo vector?
+
+Sí. Aunque usamos una matriz `dp[j][v]`, en realidad **sólo usamos `j` y `j - 1` en cada paso**, por lo tanto se pueden optimizar los recursos usando **2 vectores**:
+
+- Uno para los valores actuales
+- Otro para los anteriores
+
+Pero, incluso más allá: si se **actualiza todo en una sola pasada** y con cuidado, se puede usar **un solo vector** (`dist[v]`), sin romper el algoritmo.
+
+Esto es válido porque **las relajaciones sólo mejoran los valores**. Sin embargo, **hay que tener mucho cuidado**, porque si accidentalmente se usa el mismo vector para leer y escribir en la misma iteración, podrías usar un valor ya modificado y eso rompe la lógica.
+
 ---
 
 ## 🤔 ¿Por qué `dp[j][v] = min(dp[j][v], dp[j - 1][u] + w)`?
@@ -22,18 +33,11 @@ La razón por la que **sí necesitamos** el `min(...)` es que **un mismo nodo `v
 
 El `min` nos asegura que, si un camino mejor aparece desde otro nodo `u`, lo consideramos también.
 
----
+## 🤔 ¿Por qué sirve mirar `dp[j - 1][u] + w`?
 
-## 💡 ¿Se puede usar un solo vector?
-
-Sí. Aunque usamos una matriz `dp[j][v]`, en realidad **sólo usamos `j` y `j - 1` en cada paso**, por lo tanto se pueden optimizar los recursos usando **2 vectores**:
-
-- Uno para los valores actuales
-- Otro para los anteriores
-
-Pero, incluso más allá: si se **actualiza todo en una sola pasada** y con cuidado, se puede usar **un solo vector** (`dist[v]`), sin romper el algoritmo.
-
-Esto es válido porque **las relajaciones sólo mejoran los valores**. Sin embargo, **hay que tener mucho cuidado**, porque si accidentalmente se usa el mismo vector para leer y escribir en la misma iteración, podrías usar un valor ya modificado y eso rompe la lógica.
+La respuesta es que, siempre miramos todas las aristas `(u,v)`, con lo
+cuál nuestro estado (ya sea en forma de matriz / vector), siempre tiene
+la mejor forma de llegar a `v` con `j` aristas. Pero si yo se que desde `u` llego a `w`, me interesa saber cuánto cuesta llegar a `u` con `j-1` aristas.
 
 ---
 
